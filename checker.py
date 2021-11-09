@@ -2,66 +2,77 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import graphviz
 from graphviz import Source
+import sys
 
-G = nx.MultiDiGraph()
-G.add_edge(0, 1, label="b")
-G.add_edge(2, 1, label="b")
-G.add_edge(0, 2, label="g")
-G.add_edge(2, 2, label="g")
-G.add_edge(4, 3, label="g")
-G.add_edge(5, 3, label="g")
-G.add_edge(6, 4, label="g")
-G.add_edge(2, 5, label="r")
-G.add_edge(4, 5, label="r")
-G.add_edge(5, 6, label="r")
-G.add_edge(6, 6, label="r")
+def checker(filename):
+    G = nx.drawing.nx_pydot.read_dot(filename)
 
-nx.drawing.nx_pydot.write_dot(G, 'multi.dot')
-dot = open("multi.dot")
-s = Source.from_file("./multi.dot")
-print(s.view())
+    indegree = sorted(list(G.in_degree(G.nodes())))
+    flag = False
+    cond1 = True
+    for node, indeg in indegree:
+        if flag and indeg == 0:
+            cond1 = False
+        if indeg != 0:
+            flag = True
 
+    edges = list(G.edges(data=True))
+    d = {}
+    for u,v,edge in edges:
+        label = edge['label']
+        if label in d:
+            l = d.get(label)
+            l.append((u,v))
+        else:
+            d[label] = [(u,v)]
 
-indegree = sorted(list(G.in_degree(G.nodes())))
-flag = False
-check0 = True
-for node, indeg in indegree:
-    if flag and indeg == 0:
-        res = False
-    if indeg != 0:
-        flag = True
-print(check0)
+    prev_max = 0
+    cond2 = True
+    for k,v in sorted(d.items()):
+        cur_max = 0
+        for (out,ind) in v:
+            if (int(ind) <= int(prev_max)): #changed to cast to int 
+                cond2 = False
+            if int(ind) > int(cur_max): #changed too
+                cur_max = ind
+        prev_max = cur_max
 
-edges = list(G.edges(data=True))
-d = {}
-for u,v,edge in edges:
-    label = edge['label']
-    if label in d:
-        l = d.get(label)
-        l.append((u,v))
-    else:
-        d[label] = [(u,v)]
-
-prev_max = 0
-cond2 = True
-for k,v in sorted(d.items()):
-    cur_max = 0
-    for (out,ind) in v:
-        if (ind <= prev_max):
-            cond2 = False
-        if ind > cur_max:
-            cur_max = ind
-    prev_max = cur_max
-print(cond2)
+    cond3 = True
+    for k,v in d.items():
+        max = 0
+        for out,ind in sorted(v):
+            if int(ind) < int(max):
+                cond3 = False
+            if int(ind) > int(max): #changed to cast to int
+                max = ind
+    return cond1, cond2, cond3
 
 
-cond3 = True
-for k,v in d.items():
-    max = 0
-    for out,ind in sorted(v):
-        if ind < max:
-            cond3 = False
-        if ind > max:
-            max = ind
-print(cond3)
+input_file = open(sys.argv[1], 'r')
+cond1, cond2, cond3 = checker(input_file)
+
+fail_message = "Inputted graph is not a Wheeler Graph - the following condition(s) not met:"
+condition1 = "\n   * 0-indegree nodes come before others"
+condition2 = "\n   * a ≺ a′⟹  v < v′"
+condition3 = "\n   * (a = a′) ∧ (u < u′) ⟹  v ≤ v′"
+
+if cond1 and cond2 and cond3:
+    print("Inputed graph is a Wheeler Graph")
+
+elif not cond1 and cond2 and cond3:
+    print(fail_message + condition1)
+elif cond1 and not cond2 and cond3: 
+    print(fail_message + condition2)
+elif cond1 and cond2 and not cond3: 
+    print(fail_message + condition3)
+
+elif not cond1 and not cond2 and cond3: 
+    print(fail_message + condition1 + condition2)
+elif cond1 and not cond2 and not cond3: 
+    print(fail_message + condition2 + condition3)
+elif not cond1 and cond2 and not cond3: 
+    print(fail_message + condition1 + condition3)
+
+elif not cond1 and not cond2 and not cond3: 
+    print(fail_message + condition1 + condition2 + condition3)
 
