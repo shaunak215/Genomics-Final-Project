@@ -47,7 +47,6 @@ def checker(filename):
                 max = ind
     return cond1, cond2, cond3
 
-
 if __name__ == "__main__":
     input_file = open(sys.argv[1], 'r')
     cond1, cond2, cond3 = checker(input_file)
