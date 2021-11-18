@@ -48,31 +48,32 @@ def checker(filename):
     return cond1, cond2, cond3
 
 
-input_file = open(sys.argv[1], 'r')
-cond1, cond2, cond3 = checker(input_file)
+if __name__ == "__main__":
+    input_file = open(sys.argv[1], 'r')
+    cond1, cond2, cond3 = checker(input_file)
 
-fail_message = "Inputted graph is not a Wheeler Graph - the following condition(s) not met:"
-condition1 = "\n   * 0-indegree nodes come before others"
-condition2 = "\n   * a ≺ a′⟹  v < v′"
-condition3 = "\n   * (a = a′) ∧ (u < u′) ⟹  v ≤ v′"
+    fail_message = "Inputted graph is not a Wheeler Graph - the following condition(s) not met:"
+    condition1 = "\n   * 0-indegree nodes come before others"
+    condition2 = "\n   * a ≺ a′⟹  v < v′"
+    condition3 = "\n   * (a = a′) ∧ (u < u′) ⟹  v ≤ v′"
 
-if cond1 and cond2 and cond3:
-    print("Inputed graph is a Wheeler Graph")
+    if cond1 and cond2 and cond3:
+        print("Inputed graph is a Wheeler Graph")
 
-elif not cond1 and cond2 and cond3:
-    print(fail_message + condition1)
-elif cond1 and not cond2 and cond3: 
-    print(fail_message + condition2)
-elif cond1 and cond2 and not cond3: 
-    print(fail_message + condition3)
+    elif not cond1 and cond2 and cond3:
+        print(fail_message + condition1)
+    elif cond1 and not cond2 and cond3: 
+        print(fail_message + condition2)
+    elif cond1 and cond2 and not cond3: 
+        print(fail_message + condition3)
 
-elif not cond1 and not cond2 and cond3: 
-    print(fail_message + condition1 + condition2)
-elif cond1 and not cond2 and not cond3: 
-    print(fail_message + condition2 + condition3)
-elif not cond1 and cond2 and not cond3: 
-    print(fail_message + condition1 + condition3)
+    elif not cond1 and not cond2 and cond3: 
+        print(fail_message + condition1 + condition2)
+    elif cond1 and not cond2 and not cond3: 
+        print(fail_message + condition2 + condition3)
+    elif not cond1 and cond2 and not cond3: 
+        print(fail_message + condition1 + condition3)
 
-elif not cond1 and not cond2 and not cond3: 
-    print(fail_message + condition1 + condition2 + condition3)
+    elif not cond1 and not cond2 and not cond3: 
+        print(fail_message + condition1 + condition2 + condition3)
 
