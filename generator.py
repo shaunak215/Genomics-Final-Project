@@ -10,7 +10,7 @@ import math
 
 
 #Create a random graph
-G = nx.gnp_random_graph(15, .3, directed=True)
+G = nx.gnp_random_graph(10, .1, directed=True)
 
 # Fix graph for condition 1: all zero in degree nodes come before others
 zeroes = sorted(list(G.in_degree(G.nodes())))
@@ -57,7 +57,7 @@ leftover = (num_edges - step_size * (alp_size - 1))
 
 #Create the partitions for assigning labels
 length_to_split = []
-for i in range(3):
+for i in range(alp_size - 1):
     length_to_split.append(step_size)
 length_to_split.append(leftover)
 
@@ -136,19 +136,6 @@ for i in range(len(filtered_list) - 1):
 # {(3, 7), (0, 9), (2, 6), (9, 8), (1, 9)}
 
 
-#ANOTHER CASE IDK 
-# [(0, 4), (1, 4), (6, 5)]
-# [(3, 5), (7, 5), (4, 6)]
-# [(5, 6), (2, 6), (9, 6)]
-# [(8, 7), (4, 8), (9, 8), (4, 9)]
-
-
-# {(0, 4), (6, 5), (1, 4), (7, 5), (3, 5)}
-# {(9, 6), (4, 6), (2, 6), (5, 6)}
-# {(9, 6), (2, 6), (5, 6)}                      this should be empty i guess
-# {(8, 7), (4, 9), (9, 8), (4, 8)}
-
-
 #Assign labels to edges based on partitions we defined
 # print(l)
 # print(filtered_list)
@@ -169,10 +156,16 @@ nx.set_edge_attributes(Gn, labels)
 #I don't know why but I had to write it the file and then 
 #reread it in for the dictionary to then have the labels to 
 #be able to key on them 
+
+
+
+#commenting this out is buggy
 nx.drawing.nx_pydot.write_dot(Gn, 'current.dot')
 G = nx.drawing.nx_pydot.read_dot('current.dot')
 
 edges = list(G.edges(data=True))
+print(edges)
+
 d = {}
 for u,v,edge in edges:
     label = edge["label"]
@@ -199,18 +192,32 @@ for node, indeg in zeroes:
         zerol.append(int(node)) 
     # else:
     #     nonzero.append(node)
-print(highest_zero_node)
-print(zerol)
+# print(highest_zero_node)
+# print(zerol)
 
 # filtered = filter(lambda score: score >= 70, scores)
 to_delete = list(filter(lambda high: high > highest_zero_node, zerol))
+
+while(len(to_delete) > 0):
 # print(to_delete)
 # G.remove_nodes_from(list(to_delete)) this should work but idk why it doesnt 
 
-print(to_delete)
+# print(to_delete)
+    for node in to_delete:
+        G.remove_node(str(node))
+    
+    zeroes = sorted(list(G.in_degree(G.nodes())))
+    zerol = []
+    # nonzero = []
+    for node, indeg in zeroes:
+        if indeg == 0:
+            zerol.append(int(node)) 
 
-for node in to_delete:
-    G.remove_node(str(node))
+    to_delete = list(filter(lambda high: high > highest_zero_node, zerol))
+    
+
+# for node in to_delete:
+#     G.remove_node(str(node))
 
 nx.drawing.nx_pydot.write_dot(G, 'current.dot')
 
