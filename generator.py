@@ -52,7 +52,7 @@ edges.sort(key=lambda x: x[1])
 #Should change to be random, but also this works I guess
 num_edges = len(edges)
 alp_size = len(chars)
-step_size = math.floor(len(edges)/alp_size) 
+step_size = math.floor(len(edges)/alp_size)
 leftover = (num_edges - step_size * (alp_size - 1))
 
 #Create the partitions for assigning labels
@@ -64,7 +64,6 @@ length_to_split.append(leftover)
 Inputt = iter(edges)
 l = [list(islice(Inputt, elem))
           for elem in length_to_split]
-
 
 #Create a new filtered list that will shift items based on
 #if they violate condition 2 
@@ -96,6 +95,7 @@ for i in range(len(l)-1):
 # for item in l:
 #     print(item)
 
+# print(filtered_list)
 # print('\n')
 #if you comment this out it doesnt work 
 #this basically fixes the mistake im making above
@@ -104,6 +104,7 @@ for i in range(len(filtered_list) - 1):
         if tuple in filtered_list[i+1]:
             filtered_list[i+1].remove(tuple)
         
+# print(filtered_list)
 
 #fixed partitions
 # for item in filtered_list:
@@ -189,34 +190,32 @@ for k,v in d.items():
         if int(ind) > int(max): 
             max = ind
 
-
 #FIXING NEW CASES OF ZERO IN DEGREE
 zeroes = sorted(list(G.in_degree(G.nodes())))
 zerol = []
 # nonzero = []
 for node, indeg in zeroes:
     if indeg == 0:
-        zerol.append(int(node))
+        zerol.append(int(node)) 
     # else:
     #     nonzero.append(node)
-
-# print(zerol)
+print(highest_zero_node)
+print(zerol)
 
 # filtered = filter(lambda score: score >= 70, scores)
 to_delete = list(filter(lambda high: high > highest_zero_node, zerol))
+# print(to_delete)
+# G.remove_nodes_from(list(to_delete)) this should work but idk why it doesnt 
 
 print(to_delete)
 
-
-# G.remove_nodes_from(list(to_delete)) this should work but idk why it doesnt 
-
 for node in to_delete:
-    # print(str(node))
     G.remove_node(str(node))
 
 nx.drawing.nx_pydot.write_dot(G, 'current.dot')
 
 con1, con2, con3 = checker('current.dot')
+
 # print(str(con1) + " " + str(con2) + " " + str(con3))
 
 # edges = list(Gn.edges(data=True))
