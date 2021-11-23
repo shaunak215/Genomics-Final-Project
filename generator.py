@@ -12,7 +12,8 @@ import math
 def generateWG(num_nodes, edge_prob, visualize, output_file):
 
     #Create a random graph
-    G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True, seed=1)
+    # G = nx.gnp_random_graph(num_nodes, edge_prob, seed=1, directed=True)
+    G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
 
     # Fix graph for condition 1: all zero in degree nodes come before others
     zeroes = sorted(list(G.in_degree(G.nodes())))
@@ -186,7 +187,7 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     # print(to_delete)
     # G.remove_nodes_from(list(to_delete)) this should work but idk why it doesnt 
 
-    # print(to_delete)
+        # print(to_delete)
         for node in to_delete:
             G.remove_node(node)
             # Gn.remove_node(str(node))

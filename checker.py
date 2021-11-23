@@ -16,6 +16,7 @@ def checker(filename):
     nx.relabel_nodes(G, map)
 
     indegree = sorted(list(G.in_degree(G.nodes())))
+
     flag = False
     cond1 = True
     for node, indeg in indegree:
