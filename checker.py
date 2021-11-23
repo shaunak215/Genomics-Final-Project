@@ -7,6 +7,14 @@ import sys
 def checker(filename):
     G = nx.drawing.nx_pydot.read_dot(filename)
 
+    if G.has_node("\\n"):
+        G.remove_node("\\n")
+
+    map = {}
+    for node in G.nodes():
+        map[node] = int(node)
+    nx.relabel_nodes(G, map)
+
     indegree = sorted(list(G.in_degree(G.nodes())))
     flag = False
     cond1 = True

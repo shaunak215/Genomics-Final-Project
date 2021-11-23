@@ -12,7 +12,7 @@ import math
 def generateWG(num_nodes, edge_prob, visualize, output_file):
 
     #Create a random graph
-    G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
+    G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True, seed=1)
 
     # Fix graph for condition 1: all zero in degree nodes come before others
     zeroes = sorted(list(G.in_degree(G.nodes())))
@@ -179,6 +179,8 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
 
     # filtered = filter(lambda score: score >= 70, scores)
     to_delete = list(filter(lambda high: high > highest_zero_node, zerol))
+    # print(zeroes)
+    # print(to_delete)
 
     while(len(to_delete) > 0):
     # print(to_delete)
