@@ -45,7 +45,7 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
 
     edges = list(G.edges(data=True))
     num_chars = len(edges)/4
-    print(num_chars)
+    # print(num_chars)
     chars = alphabet_string[:int(num_chars)] # Make this a user specified amount 
 
     # Fix graph for condition 2
@@ -143,8 +143,10 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     #be able to key on them 
 
     #commenting this out is buggy
+    print(Gn.nodes())
     nx.drawing.nx_pydot.write_dot(Gn, 'current.dot')
     G = nx.drawing.nx_pydot.read_dot('current.dot')
+    print(G.nodes())
 
     edges = list(G.edges(data=True))
     # edges = list(Gn.edges(data=True))
