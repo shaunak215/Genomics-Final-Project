@@ -7,7 +7,16 @@ import sys
 def checker(filename):
     G = nx.drawing.nx_pydot.read_dot(filename)
 
-    indegree = sorted(list(G.in_degree(G.nodes())))
+    # print(G.nodes())
+    node_to_indegree = sorted(list(G.in_degree(G.nodes())))
+    
+    new_list = []
+    for node,ind in node_to_indegree: 
+        new_list.append((int(node), ind))
+
+    indegree = sorted(new_list)
+    # print(indegree)
+
     flag = False
     cond1 = True
     for node, indeg in indegree:
