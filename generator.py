@@ -175,7 +175,6 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     con1, con2, con3 = checker(output_file)
 
     if visualize:
-        dot = open(output_file)
         s = Source.from_file(output_file)
         print(s.view())
 

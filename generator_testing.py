@@ -7,7 +7,7 @@ for f in os.listdir(dir):
 
 for i in range(1):
     filename = "temp/test_"  + str(i) + ".dot"
-    c1, c2, c3 = generateWG(50,.2, False, filename)
+    c1, c2, c3 = generateWG(50,.2, True, filename)
     if not c1 or not c2 or not c2:
         print("FAILURE CASE " + str(i) +": "+ str(c1) + " " + str(c2) + " " + str(c3))
     else:
