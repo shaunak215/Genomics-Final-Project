@@ -124,8 +124,6 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     # {(3, 8), (0, 9), (8, 9), (3, 9), (9, 8), (2, 8)}]
 
     #Assign labels to edges based on partitions we defined
-    # print(l)
-    # print(filtered_list)
     l = filtered_list
     labels = {}
     count = 0

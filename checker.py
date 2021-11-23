@@ -35,12 +35,12 @@ def checker(filename):
         else:
             d[label] = [(u,v)]
 
-    prev_max = 0
+    prev_max = -1
     cond2 = True
     for k,v in sorted(d.items()):
         cur_max = 0
         for (out,ind) in v:
-            if (int(ind) <= int(prev_max)): #changed to cast to int 
+            if (int(ind) <= int(prev_max)): #changed to cast to int
                 cond2 = False
             if int(ind) > int(cur_max): #changed too
                 cur_max = ind
