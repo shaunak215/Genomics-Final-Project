@@ -9,7 +9,7 @@ from checker import checker
 import math
 
 
-def generateWG(num_nodes, edge_prob, visualize):
+def generateWG(num_nodes, edge_prob, visualize, output_file):
 
     #Create a random graph
     G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
@@ -46,7 +46,7 @@ def generateWG(num_nodes, edge_prob, visualize):
     edges = list(G.edges(data=True))
     num_chars = len(edges)/4
     print(num_chars)
-    chars = alphabet_string[:4] # Make this a user specified amount 
+    chars = alphabet_string[:int(num_chars)] # Make this a user specified amount 
 
     # Fix graph for condition 2
     # Add a check that # of edges is > than # of alphabet characters
@@ -137,13 +137,10 @@ def generateWG(num_nodes, edge_prob, visualize):
         count += 1
     nx.set_edge_attributes(Gn, labels)
 
-
     #Fix graph for condition 3 
     #I don't know why but I had to write it the file and then 
     #reread it in for the dictionary to then have the labels to 
     #be able to key on them 
-
-
 
     #commenting this out is buggy
     nx.drawing.nx_pydot.write_dot(Gn, 'current.dot')
@@ -202,8 +199,8 @@ def generateWG(num_nodes, edge_prob, visualize):
         to_delete = list(filter(lambda high: high > highest_zero_node, zerol))
 
     # nx.drawing.nx_pydot.write_dot(Gn, 'current.dot')
-    nx.drawing.nx_pydot.write_dot(G, 'current.dot')
-    con1, con2, con3 = checker('current.dot')
+    nx.drawing.nx_pydot.write_dot(G, output_file)
+    con1, con2, con3 = checker(output_file)
 
     # print(str(con1) + " " + str(con2) + " " + str(con3))
     if visualize:
