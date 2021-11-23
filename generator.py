@@ -143,10 +143,16 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     #be able to key on them 
 
     #commenting this out is buggy
+<<<<<<< HEAD
     print(Gn.nodes())
     nx.drawing.nx_pydot.write_dot(Gn, 'current.dot')
     G = nx.drawing.nx_pydot.read_dot('current.dot')
     print(G.nodes())
+=======
+    # nx.drawing.nx_pydot.write_dot(Gn, 'current.dot')
+    # G = nx.drawing.nx_pydot.read_dot('current.dot')
+    G = Gn
+>>>>>>> 0683742f4906277a410ab93265b285e67723a002
 
     edges = list(G.edges(data=True))
     # edges = list(Gn.edges(data=True))
@@ -188,7 +194,7 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
 
     # print(to_delete)
         for node in to_delete:
-            G.remove_node(str(node))
+            G.remove_node(node)
             # Gn.remove_node(str(node))
         
         zeroes = sorted(list(G.in_degree(G.nodes())))
