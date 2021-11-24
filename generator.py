@@ -165,10 +165,10 @@ def redoCondOne(G):
 
         to_delete = list(filter(lambda high: high > highest_zero_node, zerol))
 
-def generateWG(num_nodes, edge_prob, visualize, output_file):
+def generateWG(num_nodes, edge_prob, visualize, output_file, s):
 
     #Create a random graph
-    G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
+    G = nx.gnp_random_graph(num_nodes, edge_prob, seed = s, directed=True)
     Gn = cond1(G)
     lis = cond2(G,Gn)
     cond3(Gn)

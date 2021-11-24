@@ -15,7 +15,8 @@ def calc_node_num(num):
     return (0.0243 * (num ** 2)) + (.2231 * num) + 7.3507
 
 
-
+#uncomment out the code below for our final implementation
+"""
 if (len(sys.argv) != 3):
   print("Not enough arguments: provide input and output file names")
 else: 
@@ -26,31 +27,16 @@ else:
         filename = "temp/test_"  + str(i) + ".dot"
         num_nodes = int(calc_node_num(node_count))
         c1, c2, c3, l, n = generateWG(num_nodes,.2, False, filename)
-        print(n)
+"""
 
-# f = open("test_results.txt", 'w')
-# num_nodes = 10
-# for i in range(9):
-#     # test_results = "testing/test_" + str(num_nodes) + "_nodes.txt"
-    
-#     for j in range(100):
-#         filename = "temp/test_"  + str(i) + ".dot"
-#         c1, c2, c3, l, n = generateWG(num_nodes,.2, False, filename)
-#         f.write(str(n) + '\n')
-#         # print(n)
-#     f.write("Done with " + str(num_nodes) + " nodes\n")
-#     num_nodes = num_nodes + 10
 
-# f.flush()
-# f.close()
+for i in range(1000):
+    filename = "temp/test_"  + str(i) + ".dot"
+    c1, c2, c3, l, n = generateWG(15,.2, False, filename, int(i))
 
-    
-    # if not c1 or not c2 or not c2:
-        # print("FAILURE CASE " + str(i) +": "+ str(c1) + " " + str(c2) + " " + str(c3))
+    if not c1 or not c2 or not c2:
+        print("FAILURE CASE " + str(i) +": "+ str(c1) + " " + str(c2) + " " + str(c3))
         # print(l)
-    # else:
-    #     print("\n")
-
 
     #EXAMPLE OF TEST CASE THAT FAILS
     # [{(1, 2), (8, 1), (9, 2), (7, 2), (13, 2), (14, 2), (5, 2)}, 
