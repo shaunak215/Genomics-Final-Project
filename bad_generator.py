@@ -165,23 +165,48 @@ def redoCondOne(G):
 
         to_delete = list(filter(lambda high: high > highest_zero_node, zerol))
 
-def generateWG(num_nodes, edge_prob, visualize, output_file):
+def generateBadWG(num_nodes, edge_prob, visualize, output_file):
 
+    con1 = True
+    con2 = True
+    con3 = True
+
+    while True:
     #Create a random graph
-    G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
-    Gn = cond1(G)
-    lis = cond2(G,Gn)
-    cond3(Gn)
-    redoCondOne(Gn)
+        G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
+        
+        num = random.randint(0,3)
+        # num = 3
+        if num == 0:
+            Gn = cond1(G)
+            lis = cond2(G,Gn)
+            cond3(Gn)
+        elif num == 1:
+            Gn = cond1(G)
+            lis = cond2(G,Gn)
+            # cond3(Gn)
+            redoCondOne(Gn)
+        elif num == 2:
+            Gn = cond1(G)
+            lis = cond2(G,Gn)
+            # redoCondOne(Gn)
+        elif num == 3: 
+            Gn = cond1(G)
+            lis = cond2(G,Gn)
+            cond3(Gn)
+            redoCondOne(Gn)
 
-    nx.drawing.nx_pydot.write_dot(Gn, output_file)
-    con1, con2, con3 = checker(output_file)
+        nx.drawing.nx_pydot.write_dot(Gn, output_file)
+        con1, con2, con3 = checker(output_file)
+
+        if not con1 or not con2 or not con3:
+            break
 
     if visualize:
         s = Source.from_file(output_file)
         print(s.view())
 
-    num_nodes = len(Gn.nodes())
-    # print(num_nodes)
+    # num_nodes = len(Gn.nodes())
+        # print(num_nodes)
 
-    return con1, con2, con3, lis, num_nodes
+    return con1, con2, con3 #, lis, num_nodes
