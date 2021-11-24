@@ -107,6 +107,9 @@ def cond2(G, Gn):
     nx.set_edge_attributes(Gn, labels)
 
 
+    return l
+
+
 def cond3(G):
     # Fix graph for condition 3. Remove any edge that violates condition 3
     edges = list(G.edges(data=True))
@@ -167,7 +170,7 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     #Create a random graph
     G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
     Gn = cond1(G)
-    cond2(G,Gn)
+    lis = cond2(G,Gn)
     cond3(Gn)
     redoCondOne(Gn)
 
@@ -178,5 +181,7 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
         s = Source.from_file(output_file)
         print(s.view())
 
-    return con1, con2, con3
+    num_nodes = len(Gn.nodes())
+    # print(num_nodes)
 
+    return con1, con2, con3, lis, num_nodes
