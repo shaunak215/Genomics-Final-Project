@@ -2,6 +2,11 @@ from generator import generateWG
 import os
 import sys
 
+import time
+
+start = time.time()
+
+
 dir = 'samples'
 for f in os.listdir(dir):
     os.remove(os.path.join(dir, f))
@@ -32,23 +37,26 @@ else:
 
 for i in range(1000):
     filename = "samples/test_"  + str(i) + ".dot"
-    c1, c2, c3, l, n = generateWG(11,.2, False, filename, int(i))
+    c1, c2, c3, l, n = generateWG(30,.2, False, filename)
 
     if not c1 or not c2 or not c3:
         print("FAILURE CASE " + str(i) +": "+ str(c1) + " " + str(c2) + " " + str(c3))
-        # print(l)
+        print(l)
     # else:
     #     print("Pass " + str(i))
 
-    #EXAMPLE OF TEST CASE THAT FAILS
-    # [{(1, 2), (8, 1), (9, 2), (7, 2), (13, 2), (14, 2), (5, 2)}, 
-    # {(13, 3), (6, 3), (12, 3), (10, 3)}, 
-    # {(7, 4), (2, 4), (14, 4), (6, 4), (9, 4)}, 
-    # set(), 
-    # {(8, 7), (4, 5), (7, 6), (10, 6)}, 
-    # {(10, 8), (4, 9), (0, 9), (11, 9), (12, 9), (8, 9), (14, 9), (10, 9), (5, 9), (11, 8), (6, 9), (1, 9)}, 
-    # set(), 
-    # {(10, 9), (11, 9), (14, 9), (12, 9)}, 
-    # {(9, 10), (12, 11), (0, 10), (1, 11), (1, 10), (4, 11), (14, 11)}, 
-    # {(11, 12), (2, 12)}, {(9, 13), (0, 13), (14, 13), (3, 13)}, 
-    # {(13, 14), (8, 14), (5, 14), (11, 14)}]
+end = time.time()
+print(end - start)
+
+# c1, c2, c3, l, n = generateWG(30,.2, False, filename) -> 1000 samples
+# 452.26770997047424 seconds
+
+
+#11 nodes, .2, seed=26
+# [{(3, 1), (6, 1), (4, 1), (0, 1)}, 
+# {(7, 3), (10, 3), (4, 2), (4, 3)}, 
+# {(7, 4), (10, 5), (10, 4), (7, 6), (1, 6)}, 
+# {(3, 8), (10, 8), (5, 8), (10, 7), (6, 7), (9, 8), (0, 8), (7, 8)}, 
+# set(), 
+# {(2, 9), (8, 9), (5, 9), (0, 8), (6, 9), (1, 9)}, 
+# {(8, 10), (9, 10)}]

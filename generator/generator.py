@@ -94,6 +94,10 @@ def cond2(G, Gn):
         for tuple in filtered_list[i]:
             if tuple in filtered_list[i + 1]:
                 filtered_list[i + 1].remove(tuple)
+            #added in this extra check below
+            if i < len(filtered_list) - 2:
+                if tuple in filtered_list[i+2]:
+                    filtered_list[i + 2].remove(tuple)
 
     # Assign labels to edges based on partitions we defined
     l = filtered_list
