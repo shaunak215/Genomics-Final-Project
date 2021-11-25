@@ -39,9 +39,9 @@ def checker(filename):
         label = edge['label']
         if label in d:
             l = d.get(label)
-            l.append((u,v))
+            l.append((int(u),int(v)))
         else:
-            d[label] = [(u,v)]
+            d[label] = [(int(u),int(v))]
 
     prev_max = -1
     cond2 = True
@@ -55,8 +55,13 @@ def checker(filename):
         prev_max = cur_max
 
     cond3 = True
+
+    # print(d.items())
+
+
     for k,v in d.items():
         max = 0
+        # print(sorted(v))
         for out,ind in sorted(v):
             if int(ind) < int(max):
                 cond3 = False

@@ -173,16 +173,16 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     con2 = False 
     con3 = False 
 
-    while not con1 or not con2 or not con3:
+    # while not con1 or not con2 or not con3:
     #Create a random graph
-        G = nx.gnp_random_graph(num_nodes, edge_prob,directed=True)
-        Gn = cond1(G)
-        lis = cond2(G,Gn)
-        cond3(Gn)
-        redoCondOne(Gn)
+    G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
+    Gn = cond1(G)
+    lis = cond2(G,Gn)
+    cond3(Gn)
+    redoCondOne(Gn)
 
-        nx.drawing.nx_pydot.write_dot(Gn, output_file)
-        con1, con2, con3 = checker(output_file)
+    nx.drawing.nx_pydot.write_dot(Gn, output_file)
+    con1, con2, con3 = checker(output_file)
     # print(str(con1) + str(con2) + str(con3))
 
     if visualize:

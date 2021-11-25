@@ -30,15 +30,15 @@ else:
 """
 
 
-for i in range(10):
+for i in range(1000):
     filename = "samples/test_"  + str(i) + ".dot"
-    c1, c2, c3, l, n = generateWG(15,.2, False, filename, int(i))
+    c1, c2, c3, l, n = generateWG(11,.2, False, filename, int(i))
 
     if not c1 or not c2 or not c3:
         print("FAILURE CASE " + str(i) +": "+ str(c1) + " " + str(c2) + " " + str(c3))
         # print(l)
-    else:
-        print("Pass " + str(i))
+    # else:
+    #     print("Pass " + str(i))
 
     #EXAMPLE OF TEST CASE THAT FAILS
     # [{(1, 2), (8, 1), (9, 2), (7, 2), (13, 2), (14, 2), (5, 2)}, 
