@@ -41,12 +41,16 @@ def cond2(G, Gn):
 
     edges = list(G.edges(data=True))
     num_chars = len(edges) / 4
+    if num_chars < 1:
+        num_chars = 1
+    # print(num_chars)
     chars = alphabet_string[:int(num_chars)]  # Make this a user specified amount
 
     # Fix graph for condition 2
     # Add a check that # of edges is > than # of alphabet characters
     # Add edge labels randomly
     edges = list(Gn.edges())
+    # print(edges)
     edges.sort(key=lambda x: x[1])
 
     # Find out the length for the partitions
@@ -185,9 +189,16 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     cond3(Gn)
     redoCondOne(Gn)
 
+    # D = {}
+    # for node in Gn.nodes():
+    #     D[node] = "S" + str(node)
+
     nx.drawing.nx_pydot.write_dot(Gn, output_file)
-    con1, con2, con3 = checker(output_file)
+    checker(output_file)
     # print(str(con1) + str(con2) + str(con3))
+
+    # Gn = nx.relabel_nodes(Gn, D)
+    # nx.drawing.nx_pydot.write_dot(Gn, output_file)
 
     if visualize:
         s = Source.from_file(output_file)
@@ -196,4 +207,5 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     num_nodes = len(Gn.nodes())
     # print(num_nodes)
 
-    return con1, con2, con3, lis, num_nodes
+    # return con1, con2, con3, lis, num_nodes
+    return num_nodes
