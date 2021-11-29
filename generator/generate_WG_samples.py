@@ -26,5 +26,5 @@ else:
     for i in range(num_graphs):
         filename = "samples/test_"  + str(i) + ".dot"
         num_nodes = int(calc_node_num(node_count))
-        c1, c2, c3, l, n = generateWG(num_nodes,.2, False, filename)
+        generateWG(num_nodes,.2, False, filename)
         # print(n)

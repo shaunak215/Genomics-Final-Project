@@ -74,34 +74,23 @@ def cond2(G, Gn):
     # if they violate condition 2
     filtered_list = [set() for i in range(len(l))]
     # by default the first partition won't violate anything bc no prev partition
-    for tuple in l[0]:
-        filtered_list[0].add(tuple)
 
-    # SOMETHING IS WRONG HERE
-    for i in range(len(l) - 1):
+    seen = set()
+    for i in range(len(l)):
         # get the highest node for that partition
+        for tuple in l[i]:
+            if tuple not in seen:
+                filtered_list[i].add(tuple)
+                seen.add(tuple)
         max_out_node = l[i][-1][1]
         # check the subsequent partitions
         for j in range(i + 1, len(l)):
             # print("j: " + str(j))
             for tuple in l[j]:
-                # if the node matches, pull in down to the current parition
-                if tuple[1] == max_out_node:
+                # if the node matches, pull in down to the current partition
+                if tuple[1] == max_out_node and tuple not in seen:
                     filtered_list[i].add(tuple)
-                # otherwise add it to where it to next partition
-                else:
-                    filtered_list[j].add(tuple)  # actually should this be j idk ? was i+1 before
-
-    # if you comment this out it doesnt work
-    # this basically fixes the mistake im making above
-    for i in range(len(filtered_list) - 1):
-        for tuple in filtered_list[i]:
-            if tuple in filtered_list[i + 1]:
-                filtered_list[i + 1].remove(tuple)
-            #added in this extra check below
-            if i < len(filtered_list) - 2:
-                if tuple in filtered_list[i+2]:
-                    filtered_list[i + 2].remove(tuple)
+                    seen.add(tuple)
 
     # Assign labels to edges based on partitions we defined
     l = filtered_list
@@ -177,9 +166,9 @@ def redoCondOne(G):
 
 def generateWG(num_nodes, edge_prob, visualize, output_file):
 
-    con1 = False
-    con2 = False 
-    con3 = False 
+    # con1 = False
+    # con2 = False
+    # con3 = False
 
     # while not con1 or not con2 or not con3:
     #Create a random graph
@@ -194,7 +183,7 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     #     D[node] = "S" + str(node)
 
     nx.drawing.nx_pydot.write_dot(Gn, output_file)
-    checker(output_file)
+    con1, con2, con3 = checker(output_file)
     # print(str(con1) + str(con2) + str(con3))
 
     # Gn = nx.relabel_nodes(Gn, D)
@@ -208,4 +197,4 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
     # print(num_nodes)
 
     # return con1, con2, con3, lis, num_nodes
-    return num_nodes
+    # return num_nodes
