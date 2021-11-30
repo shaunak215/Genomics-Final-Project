@@ -2,11 +2,7 @@ from generator import generateWG
 import os
 import sys
 
-dir = 'samples'
-for f in os.listdir(dir):
-    os.remove(os.path.join(dir, f))
-
-dir = 'testing'
+dir = 'random_node_samples'
 for f in os.listdir(dir):
     os.remove(os.path.join(dir, f))
 
@@ -24,7 +20,7 @@ else:
     node_count = int(sys.argv[2])
 
     for i in range(num_graphs):
-        filename = "samples/test_"  + str(i) + ".dot"
+        filename = "random_node_samples/test_"  + str(i) + ".dot"
         num_nodes = int(calc_node_num(node_count))
-        generateWG(num_nodes,.2, False, filename, False)
+        generateWG(num_nodes,.2, False, filename, True)
         # print(n)

@@ -164,7 +164,7 @@ def redoCondOne(G):
 
         to_delete = list(filter(lambda high: high > highest_zero_node, zerol))
 
-def generateWG(num_nodes, edge_prob, visualize, output_file):
+def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
 
     # con1 = False
     # con2 = False
@@ -193,7 +193,31 @@ def generateWG(num_nodes, edge_prob, visualize, output_file):
         s = Source.from_file(output_file)
         print(s.view())
 
-    num_nodes = len(Gn.nodes())
+    if randomize: 
+        num_nodes = len(Gn.nodes())
+        new_list = list(range(0,num_nodes))
+        random.shuffle(new_list)
+        # print(new_list)
+        
+        string_list = []
+        for i in new_list:
+            val = "S" + str(i)
+            string_list.append(val)
+    
+        # print(len(string_list))
+
+        new_labels = {}
+        curr_nodes = list(Gn.nodes)
+        # print(len(curr_nodes))
+        for i in curr_nodes:
+            new_labels[i] = string_list.pop(0)
+            # string_list.pop(0)
+
+        # print(new_labels)
+
+        Gn = nx.relabel_nodes(Gn, new_labels)
+
+        nx.drawing.nx_pydot.write_dot(Gn, output_file)
     # print(num_nodes)
 
     # return con1, con2, con3, lis, num_nodes
