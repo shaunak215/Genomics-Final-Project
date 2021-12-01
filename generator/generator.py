@@ -181,9 +181,9 @@ def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
     # D = {}
     # for node in Gn.nodes():
     #     D[node] = "S" + str(node)
-
-    nx.drawing.nx_pydot.write_dot(Gn, output_file)
-    con1, con2, con3 = checker(output_file)
+    output_file_samples = "samples" + output_file
+    nx.drawing.nx_pydot.write_dot(Gn, output_file_samples)
+    # con1, con2, con3 = checker(output_file)
     # print(str(con1) + str(con2) + str(con3))
 
     # Gn = nx.relabel_nodes(Gn, D)
@@ -194,6 +194,8 @@ def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
         print(s.view())
 
     if randomize: 
+        output_file_before = "before_shuffle"  + output_file
+        nx.drawing.nx_pydot.write_dot(Gn, output_file_before)
         num_nodes = len(Gn.nodes())
         new_list = list(range(0,num_nodes))
         random.shuffle(new_list)
@@ -216,8 +218,9 @@ def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
         # print(new_labels)
 
         Gn = nx.relabel_nodes(Gn, new_labels)
+        output_file_after = "after_shuffle" + output_file
+        nx.drawing.nx_pydot.write_dot(Gn, output_file_after)
 
-        nx.drawing.nx_pydot.write_dot(Gn, output_file)
     # print(num_nodes)
 
     # return con1, con2, con3, lis, num_nodes
