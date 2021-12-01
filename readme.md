@@ -6,7 +6,7 @@ Final Project for Computational Genomics: Sequences (EN.601.647) at JHU by
 * Kuan-Hao Chao (Kuanhao-Chao)
 * Beril Erdogdu (berilerdogdu) 
 
-Our suite of tools for Wheeler Graphs contains functionality for the following features: visualization of graphs in .DOT format, checker for WGs given node and edge labels, random generation of WGs recognizer for WGs given only edge labels, and pattern detection within a WG. 
+Our suite of tools for Wheeler Graphs contains functionality for the following features: visualization of graphs in .DOT format, checker for WGs given node and edge labels, random generation of WGs, recognizer for WGs given only edge labels, and pattern detection within a WG. 
 
 ## Configuration 
 In order to run the following, be sure to have installed/ updated the following:
