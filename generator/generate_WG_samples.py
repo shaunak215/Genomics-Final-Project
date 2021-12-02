@@ -24,7 +24,7 @@ else:
     node_count = int(sys.argv[2])
 
     for i in range(num_graphs):
-        filename = "samples/test_"  + str(i) + ".dot"
+        filename = "/test_"  + str(i) + ".dot"
         num_nodes = int(calc_node_num(node_count))
         generateWG(num_nodes,.2, False, filename, False)
         # print(n)
