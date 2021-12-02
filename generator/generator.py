@@ -20,20 +20,21 @@ def cond1(G):
         else:
             nonzero.append(node)
 
-    num = len(zerol)
-    d = dict()
-    count = 0
-    for i in zerol:
-        d[i] = count
-        count += 1
+    if len(zerol) != 0: 
+        num = len(zerol)
+        d = dict()
+        count = 0
+        for i in zerol:
+            d[i] = count
+            count += 1
 
-    for i in range(len(nonzero)):
-        d[nonzero[i]] = num
-        num += 1
+        for i in range(len(nonzero)):
+            d[nonzero[i]] = num
+            num += 1
 
-    # map the old nodes to the new ones
-    return nx.relabel_nodes(G, d, copy=True)
-
+        # map the old nodes to the new ones
+        G = nx.relabel_nodes(G, d, copy=True)
+    return G 
 
 def cond2(G, Gn):
     # Generate the alphabet for the labels
