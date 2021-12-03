@@ -158,11 +158,11 @@ You will get the following five output files:
 5. ***graph.dot***:
    ```
     strict digraph  {
-    2 -> 3 [label=a];
-    2 -> 4 [label=a];
-    5 -> 4 [label=a];
-    1 -> 5 [label=b];
-    2 -> 5 [label=b];
+      2 -> 3 [label=a];
+      2 -> 4 [label=a];
+      5 -> 4 [label=a];
+      1 -> 5 [label=b];
+      2 -> 5 [label=b];
     }
    ```
 
