@@ -147,7 +147,7 @@ You will get the following five output files:
    ```
     baaba
    ```
-4. ***node.dot***:
+4. ***node.txt***:
    ```
     S3	1
     S5	2
