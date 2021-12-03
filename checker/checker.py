@@ -10,21 +10,14 @@ def checker(filename):
     if G.has_node("\\n"):
         G.remove_node("\\n")
 
-    # map = {}
-    # for node in G.nodes():
-    #     map[node] = int(node)
-    # nx.relabel_nodes(G, map)
-
-    new_list = [] 
+    indegree = [] 
     for node, ind in G.in_degree(G.nodes()):
-        new_list.append((int(node), ind))
-        # print(node)
+        indegree.append((int(node), ind))
 
-    indegree = new_list
+    # indegree = new_list
 
-    indegree = sorted(new_list)
+    indegree = sorted(indegree)
 
-    # print(indegree)
     flag = False
     cond1 = True
     for node, indeg in indegree:

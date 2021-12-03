@@ -44,8 +44,7 @@ def cond2(G, Gn):
     num_chars = len(edges) / 4
     if num_chars < 1:
         num_chars = 1
-    # print(num_chars)
-    chars = alphabet_string[:int(num_chars)]  # Make this a user specified amount
+    chars = alphabet_string[:int(num_chars)] 
 
     # Fix graph for condition 2
     # Add a check that # of edges is > than # of alphabet characters
@@ -55,7 +54,6 @@ def cond2(G, Gn):
     edges.sort(key=lambda x: x[1])
 
     # Find out the length for the partitions
-    # Should change to be random, but also this works I guess
     num_edges = len(edges)
     alp_size = len(chars)
     step_size = math.floor(len(edges) / alp_size)
@@ -75,7 +73,6 @@ def cond2(G, Gn):
     # if they violate condition 2
     filtered_list = [set() for i in range(len(l))]
     # by default the first partition won't violate anything bc no prev partition
-
     seen = set()
     for i in range(len(l)):
         # get the highest node for that partition
@@ -86,7 +83,6 @@ def cond2(G, Gn):
         max_out_node = l[i][-1][1]
         # check the subsequent partitions
         for j in range(i + 1, len(l)):
-            # print("j: " + str(j))
             for tuple in l[j]:
                 # if the node matches, pull in down to the current partition
                 if tuple[1] == max_out_node and tuple not in seen:
@@ -167,11 +163,6 @@ def redoCondOne(G):
 
 def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
 
-    # con1 = False
-    # con2 = False
-    # con3 = False
-
-    # while not con1 or not con2 or not con3:
     #Create a random graph
     G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
     Gn = cond1(G)
@@ -179,16 +170,10 @@ def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
     cond3(Gn)
     redoCondOne(Gn)
 
-    # D = {}
-    # for node in Gn.nodes():
-    #     D[node] = "S" + str(node)
     output_file_samples = "samples" + output_file
     nx.drawing.nx_pydot.write_dot(Gn, output_file_samples)
     # con1, con2, con3 = checker(output_file)
     # print(str(con1) + str(con2) + str(con3))
-
-    # Gn = nx.relabel_nodes(Gn, D)
-    # nx.drawing.nx_pydot.write_dot(Gn, output_file)
 
     if visualize:
         s = Source.from_file(output_file)
@@ -200,29 +185,21 @@ def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
         num_nodes = len(Gn.nodes())
         new_list = list(range(0,num_nodes))
         random.shuffle(new_list)
-        # print(new_list)
         
         string_list = []
         for i in new_list:
             val = "S" + str(i)
             string_list.append(val)
-    
-        # print(len(string_list))
 
         new_labels = {}
         curr_nodes = list(Gn.nodes)
-        # print(len(curr_nodes))
         for i in curr_nodes:
             new_labels[i] = string_list.pop(0)
-            # string_list.pop(0)
-
-        # print(new_labels)
 
         Gn = nx.relabel_nodes(Gn, new_labels)
         output_file_after = "after_shuffle" + output_file
         nx.drawing.nx_pydot.write_dot(Gn, output_file_after)
 
-    # print(num_nodes)
 
     # return con1, con2, con3, lis, num_nodes
     # return num_nodes
