@@ -1,0 +1,11 @@
+Eduardo and Shaunak 
+- worked jointly on the Generator, Visualizer, and Checker. 
+
+Kuanhao 
+- did all work related to the Recognizer 
+
+Beril 
+- did all work related to the pattern matching. 
+
+
+We each wrote up our respective parts in the final paper. 
