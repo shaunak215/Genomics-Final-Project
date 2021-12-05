@@ -10,9 +10,9 @@ dir = 'testing'
 for f in os.listdir(dir):
     os.remove(os.path.join(dir, f))
 
-# y = 0.0243x^2 + 0.2231x + 7.3507
+# y = 0.0252x^2 + 0.226x + 6.2819
 def calc_node_num(num):
-    return (0.0243 * (num ** 2)) + (.2231 * num) + 7.3507
+    return (0.0252 * (num ** 2)) + (.226 * num) + 6.2819
 
 
 #uncomment out the code below for our final implementation
