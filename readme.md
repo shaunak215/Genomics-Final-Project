@@ -172,7 +172,7 @@ Beril Add
 
 
 ## Group member contribution
-|            | Eduardo Aguila | Shaunak Shah | Kuan-Hao Chao | Beril Erdogdu |
------------- | -------------- | ------------ | ------------- |-------------- |
-Coding       |  |  | recognizer | Pattern matcher |
-Deliverables |  |  | recognizer | Pattern matcher |
+|            | Eduardo Aguila and Shaunak Shah | Kuan-Hao Chao | Beril Erdogdu |
+------------ | -------------------------- | ------------- |-------------- |
+Coding       | Visualizer, Checker, Recognizer | recognizer | Pattern matcher |
+Deliverables | Visualizer, Checker, Recognizer | recognizer | Pattern matcher |
