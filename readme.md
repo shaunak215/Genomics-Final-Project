@@ -212,7 +212,7 @@ python pattern_matcher.py O.txt I.txt L.txt p.txt path_to_output_file WG.dot(opt
 	9 -> 10 [label=t];
 	10 -> 4 [label=a];
 	4 -> 7 [label=g];
-	}
+}
     ```
 
 
@@ -230,6 +230,11 @@ python pattern_matcher.py O.txt I.txt L.txt p.txt results.txt ex_wg.dot updated_
 ```
 
 This example contains the example Wheeler Graph found in the paper by Gibney and Thankachan. Feel free to input any pattern p and visualize the path taken by the Pattern Matcher.
+
+The input files already provided in the directory will try to match p = 'cbbc' on the input graph and output the following path:
+
+![alt text](https://github.com/shaunak215/Genomics-Final-Project/blob/2b9cde0763e4c079298c96130fd630e9f6ab791e/pattern_matcher/example_path.png)
+
 
 The directory "wg_pattern_matcher_examples/recognizer_output" contains 50+ other example Wheeler Graph outputted by the recognizer that we tested our pattern matcher with. Feel free to experiment!
 
