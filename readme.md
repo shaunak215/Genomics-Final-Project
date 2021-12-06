@@ -226,8 +226,7 @@ python pattern_matcher.py O.txt I.txt L.txt p.txt path_to_output_file WG.dot(opt
 Again in the ./pattern_matcher directory, run the following:
 
 ```
-python pattern_matcher.py wg_pattern_matcher_examples/recognizer_output/1__g1/O.txt wg_pattern_matcher_examples/recognizer_output/1__g1/I.txt wg_pattern_matcher_examples/recognizer_output/1__g1/L.txt p.txt example_output.txt  wg_pattern_matcher_examples/recognizer_output/1__g1/graph.dot example_g.dot
-
+python pattern_matcher.py O.txt I.txt L.txt p.txt results.txt ex_wg.dot updated_wg.dot
 ```
 
 This example contains the example Wheeler Graph found in the paper by Gibney and Thankachan. Feel free to input any pattern p and visualize the path taken by the Pattern Matcher.
