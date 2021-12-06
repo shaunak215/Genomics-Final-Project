@@ -168,8 +168,71 @@ You will get the following five output files:
 
 ## Pattern Detection
 
-Beril Add 
+Upon receiving a directed edge labeled graph that can be a proper Wheeler Graph, the Wheeler Graph recognizer described above outputs updated O, I and L vectors with appropriate node labels. The Wheeler Graph Pattern Matcher takes these three vectors as input and queries the graph to find occurrences of any given pattern p. For any found occurrence of p, the program writes out the character and rank of the first character of p in the WG.
 
+The Wheeler Graph Pattern Matcher we implemented takes as an optional argument the original graph structure -in .dot format- outputted by the Wheeler Graph Recognizer. If this option is taken and the inputted pattern p is found in the Wheeler graph, the pattern matcher will output the same Wheeler Graph with all the occurrences of p in the graph being highlighted.
+
+### How to run Pattern Matcher
+```
+cd ./pattern_matcher
+python pattern_matcher.py O.txt I.txt L.txt p.txt path_to_output_file WG.dot(optional) path_to_output_graph.dot(optional)
+```
+
+### Required Input Format
+
+1. ***O.txt***:
+   ```
+    01010010101011010101
+   ```
+2. ***I.txt***:
+   ```
+    10010101010101010101
+   ```
+3. ***L.txt***:
+   ```
+    ttcggaaata
+   ```
+    These vector files are in the same format as the Wheeler Recognizer output.
+4. ***p.txt***:
+   ```
+    aga
+    ```
+5. ***WG.dot***  ***IMPORTANT ***:
+   Please make sure that your node labels start with '1' and not '0'. This is the format the Recognizer indexes its node labels and the pattern matcher is implemented to parse them accordingly. If your node labels start with '0', the graph will not be parsed correctly.
+
+   ```
+    strict digraph  {
+	1 -> 8 [label=t];
+	8 -> 3 [label=a];
+	3 -> 5 [label=c];
+	3 -> 6 [label=g];
+	5 -> 2 [label=a];
+	6 -> 2 [label=a];
+	2 -> 9 [label=t];
+	9 -> 10 [label=t];
+	10 -> 4 [label=a];
+	4 -> 7 [label=g];
+}
+    ```
+
+
+
+
+
+
+
+### Reproducible example
+
+Again in the ./pattern_matcher directory, run the following:
+
+```
+python pattern_matcher.py wg_pattern_matcher_examples/recognizer_output/1__g1/O.txt wg_pattern_matcher_examples/recognizer_output/1__g1/I.txt wg_pattern_matcher_examples/recognizer_output/1__g1/L.txt p.txt example_output.txt  wg_pattern_matcher_examples/recognizer_output/1__g1/graph.dot example_g.dot
+
+```
+
+This example contains the example Wheeler Graph found in the paper by Gibney and Thankachan. Feel free to input any pattern p and visualize the path taken by the Pattern Matcher.
+
+The directory "wg_pattern_matcher_examples/recognizer_output" contains 50+ other example Wheeler Graph outputted by the recognizer that we tested our pattern matcher with. Feel free to experiment!
 
 ## Group member contribution
 |            | Eduardo Aguila and Shaunak Shah | Kuan-Hao Chao | Beril Erdogdu |
