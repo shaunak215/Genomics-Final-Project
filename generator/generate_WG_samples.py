@@ -6,9 +6,9 @@ dir = 'samples'
 for f in os.listdir(dir):
     os.remove(os.path.join(dir, f))
 
-dir = 'testing'
-for f in os.listdir(dir):
-    os.remove(os.path.join(dir, f))
+# dir = 'testing'
+# for f in os.listdir(dir):
+#     os.remove(os.path.join(dir, f))
 
 # y = 0.0252x^2 + 0.226x + 6.2819
 def calc_node_num(num):

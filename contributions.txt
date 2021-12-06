@@ -1,5 +1,15 @@
 Eduardo and Shaunak 
-- worked jointly on the Generator, Visualizer, and Checker. 
+We decided to split up the following parts, and we ended up working on 
+most of the pieces together in a partner-programming style: visualizer, 
+generator, and checker. We first worked on the visualizer and graph 
+format storage, and did all of this together in the early stages. 
+The generator was relatively straight-forward, and we did most of the 
+intial logic together. After it was complete, Shaunak refactored and cleaned 
+up the code, and Eduardo added more detailed messages for the user (i.e. 
+what parts of the graph weren't WG compliant). We did all of the logic for 
+the generator together, and after we had something working Shaunak refactored 
+code, and Eduardo did the testing/ data analysis for getting more accurate 
+node counts. 
 
 Kuanhao 
 - did all work related to the Recognizer 
