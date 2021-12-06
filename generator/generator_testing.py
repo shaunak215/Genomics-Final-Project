@@ -32,7 +32,7 @@ for i in range(20): #will run for nodes 5 to 100
     print("Done with " + str(node_test_count) + " nodes")
     df[str(node_test_count)] = node_list
     end = time.time()
-    w.write("Time for 1000 samples of " + str(node_test_count) + ": " str(end-start) + " seconds\n")
+    w.write("Time for 1000 samples of " + str(node_test_count) + ": " + str(end-start) + " seconds\n")
     node_test_count = node_test_count + 5
 
 df.to_csv("testing2.csv")
