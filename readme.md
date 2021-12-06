@@ -53,7 +53,14 @@ Example 1: `python3 generate_WG_samples.py 10 15 ` will generate 10 samples of g
 
 Example 2: `python3 generate_WG_samples.py 20 50 ` will generate 20 samples of graphs with approximately 50 nodes within the `/samples` directory. 
 
-Note that there are various generator files within this directory. The vast majority of these were used for internal testing. For example, running `python3 generate_WG_RandomNodes.py 10 10` will generate 10 samples of graphs with approximately 10 nodes, where the overall structure of the graph is valid, but the nodes are in shuffled/random order. The purpose of this is to further test our recognizer. 
+Note that there are various generator files within this directory. The vast majority of these were used for internal testing. For example, running `python3 generate_WG_RandomNodes.py 10 10` will generate 10 samples of graphs with approximately 10 nodes, where the overall structure of the graph is valid, but the nodes are in shuffled/random order. The purpose of this is to further test our recognizer. Other generators that were used for testing include: 
+
+`generator_testing.py` and `generator_test_version.py` which are analagous to `generate_WG_samples.py` and `generator.py` respectively. Note that in order to run these you will need to create a `testing` directory for the samples to be stored in. `generator_testing.py` takes no command line arguments, and can be run with:
+```python
+python3 generator_testing.py
+```
+It was used to validate random samples through our checker, perform some timing analysis, and to determine a formula for node count generation.
+
 
 ## Recognizer
 

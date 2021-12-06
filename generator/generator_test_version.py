@@ -48,8 +48,9 @@ def cond2(G, Gn):
 
     # Fix graph for condition 2
     # Add a check that # of edges is > than # of alphabet characters
-    # Add edge labels
+    # Add edge labels randomly
     edges = list(Gn.edges())
+    # print(edges)
     edges.sort(key=lambda x: x[1])
 
     # Find out the length for the partitions
@@ -100,6 +101,9 @@ def cond2(G, Gn):
             labels[(u, v)] = tempmap
         count += 1
     nx.set_edge_attributes(Gn, labels)
+
+
+    return l
 
 
 def cond3(G):
@@ -157,17 +161,18 @@ def redoCondOne(G):
 
         to_delete = list(filter(lambda high: high > highest_zero_node, zerol))
 
-def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
-
+def generateWG_Testing(num_nodes, edge_prob, visualize, output_file, randomize):
     #Create a random graph
     G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
     Gn = cond1(G)
-    cond2(G,Gn)
+    lis = cond2(G,Gn)
     cond3(Gn)
     redoCondOne(Gn)
 
-    output_file_samples = "samples" + output_file
+    output_file_samples = "testing" + output_file
     nx.drawing.nx_pydot.write_dot(Gn, output_file_samples)
+    con1, con2, con3 = checker(output_file_samples)
+    node_count = len(Gn.nodes())
 
     #if this option is selected, the graph pdf will be opened
     if visualize:
@@ -198,3 +203,5 @@ def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
         Gn = nx.relabel_nodes(Gn, new_labels)
         output_file_after = "after_shuffle" + output_file
         nx.drawing.nx_pydot.write_dot(Gn, output_file_after)
+
+    return con1, con2, con3, lis, node_count
