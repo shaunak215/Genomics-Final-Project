@@ -131,6 +131,5 @@ dmypy.json
 
 *.pdf
 *.svg
-*.dot
 .idea
 .DS_Store
