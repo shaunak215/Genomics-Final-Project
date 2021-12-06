@@ -233,7 +233,7 @@ This example contains the example Wheeler Graph found in the paper by Gibney and
 
 The input files already provided in the directory will try to match p = 'cbbc' on the input graph and output the following path:
 
-![alt text](https://github.com/shaunak215/Genomics-Final-Project/blob/14d6e45a5b571ad1d640771f1c1f9b4e4e711638/pattern_matcher/example_path.png)
+![alt text](https://github.com/shaunak215/Genomics-Final-Project/blob/17f167ecf063c637e48e83b104f47574871571a6/pattern_matcher/example_path.png)
 
 
 The directory "wg_pattern_matcher_examples/recognizer_output" contains 50+ other example Wheeler Graph outputted by the recognizer that we tested our pattern matcher with. Feel free to experiment!
