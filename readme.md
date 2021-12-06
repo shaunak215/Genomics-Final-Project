@@ -212,7 +212,7 @@ python pattern_matcher.py O.txt I.txt L.txt p.txt path_to_output_file WG.dot(opt
 	9 -> 10 [label=t];
 	10 -> 4 [label=a];
 	4 -> 7 [label=g];
-}
+	}
     ```
 
 
