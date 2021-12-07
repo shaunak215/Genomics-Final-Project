@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 
-*.pdf
 *.svg
 .idea
 .DS_Store
