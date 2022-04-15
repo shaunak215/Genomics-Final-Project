@@ -177,23 +177,80 @@ def redoCondOne(G):
     # print(list(G.edges(data=True)))
     # nx.drawing.nx_pydot.write_dot(G, ("print" + str(count) + ".dot"))
 
-def generateWG(num_nodes, edge_prob, visualize, output_file, randomize):
 
-    #Create a random graph
+def makeBad(G):
+    edges = list(G.edges(data=True))
+    d = {}
+    for u, v, edge in edges:
+        label = edge["label"]
+        if label in d:
+            l = d.get(label)
+            l.append((u, v))
+        else:
+            d[label] = [(u, v)]
+
+    alphabet = list(sorted(d.keys()))
+    alphabet_size = len(alphabet)
+    
+    # print(alphabet)
+    partition_selected = 3
+    partitions = 8
+
+    if(alphabet_size/partitions < 1):
+        # sys.exit("ERROR: too many partitions for alphabet size")
+        return
+
+    split_alphabet = list(split(alphabet, partitions))
+    print(split_alphabet)
+
+    mutate_range = split_alphabet[partition_selected]
+    mutate_index = random.randint(0,len(mutate_range)-1)
+    mutate_letter = mutate_range[mutate_index]
+    # print(mutate_letter)
+
+    # print(d[mutate_letter])
+    edge_to_alter_index = random.randint(0,len(d[mutate_letter])-1)
+    edge_to_alter = d[mutate_letter][edge_to_alter_index]
+    start = edge_to_alter[0]
+    end = edge_to_alter[1]
+    G.remove_edge(start, end)
+
+    random_node = list(G.nodes())[random.randint(0,len(list(G.nodes()))-1)]
+    # print(list(G.nodes()))
+    # print(random_node)
+    G.add_edge(start, random_node, label=mutate_letter)
+    # print(start, end)
+
+def split(a, n):
+    k, m = divmod(len(a), n)
+    return (a[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
+
+def generateBadWG(num_nodes, edge_prob, visualize, output_file, randomize):
+
+    #Create a correct random graph
     G = nx.gnp_random_graph(num_nodes, edge_prob, directed=True)
     Gn = cond1(G)
     cond2(G,Gn)
-    nx.drawing.nx_pydot.write_dot(Gn, "before.dot")
     cond3(Gn)
-    nx.drawing.nx_pydot.write_dot(Gn, "after.dot")
     redoCondOne(Gn)
-    # print(sorted(list(Gn.in_degree(Gn.nodes()))))
 
-    output_file_samples = "samples" + output_file
+    # edit one of the edges at a particular partition to violate conditions 
+    makeBad(Gn)
+
+    # Check the graph to ensure a condition was violated
+    output_file_samples = "bad_samples" + output_file
     nx.drawing.nx_pydot.write_dot(Gn, output_file_samples)
-
-
     con1, con2, con3 = checker(output_file_samples)
+
+    # continue producing graphs until an incorrect one is produced
+    while con2 and con3:
+        # print("entering inside while")
+        # print(str(con1) + str(con2) + str(con3))
+        nx.drawing.nx_pydot.write_dot(Gn, output_file_samples)
+        _, con2, con3 = checker(output_file_samples)
+        makeBad(Gn)
+        
+    # print('\n')
     print(str(con1) + str(con2) + str(con3))
 
     #if this option is selected, the graph pdf will be opened

@@ -17,6 +17,7 @@ def checker(filename):
     # indegree = new_list
 
     indegree = sorted(indegree)
+    # print(indegree)
 
     flag = False
     cond1 = True
