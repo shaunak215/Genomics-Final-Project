@@ -201,7 +201,7 @@ def makeBad(G):
         return
 
     split_alphabet = list(split(alphabet, partitions))
-    print(split_alphabet)
+    # print(split_alphabet)
 
     mutate_range = split_alphabet[partition_selected]
     mutate_index = random.randint(0,len(mutate_range)-1)
@@ -244,13 +244,10 @@ def generateBadWG(num_nodes, edge_prob, visualize, output_file, randomize):
 
     # continue producing graphs until an incorrect one is produced
     while con2 and con3:
-        # print("entering inside while")
-        # print(str(con1) + str(con2) + str(con3))
+        makeBad(Gn)
         nx.drawing.nx_pydot.write_dot(Gn, output_file_samples)
         _, con2, con3 = checker(output_file_samples)
-        makeBad(Gn)
         
-    # print('\n')
     print(str(con1) + str(con2) + str(con3))
 
     #if this option is selected, the graph pdf will be opened
